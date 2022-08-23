@@ -43,15 +43,16 @@ exports.putUpdateTodo = (req, res) => {
 };
 
 exports.deleteTodo = (req, res) => {
-    Todo.findByIdAndRemove(req.params.id, req.body).then((data) =>
-        res
-            .json({ message: "todo deleted successfully", data })
-            .catch((err) =>
-                res
-                    .status(404)
-                    .json({ error: "book not found", message: err.message })
-            )
-    );
+    Todo.findByIdAndDelete(req.params.id)
+        .then((todo) => {
+            console.log("delete", { todo });
+            return res.json({ message: "deleted successfully", todo });
+        })
+        .catch((err) =>
+            res
+                .status(400)
+                .json({ error: "unable to delete todo", message: err.message })
+        );
 };
 
 exports.changeCompleted = (req, res) => {
