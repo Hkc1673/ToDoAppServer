@@ -8,6 +8,10 @@ const TodoSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+    category: {
+        type: String,
+        required: true,
+    },
     status: {
         type: String,
         enum: ["to do", "in progress", "done"],
