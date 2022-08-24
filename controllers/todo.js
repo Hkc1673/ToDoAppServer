@@ -55,15 +55,16 @@ exports.deleteTodo = (req, res) => {
         );
 };
 
-exports.changeCompleted = (req, res) => {
-    Todo.findByIdAndUpdate(req.params.id, req.body)
+exports.changeStatus = (req, res) => {
+    Todo.findByIdAndUpdate(req.params.id, { status: req.body.status })
         .then((todo) => {
-            console.log("changed status", { todo });
-            return res.json({ message: "updated successfully", todo });
+            console.log("status", { todo });
+            return res.json({ message: "status updated successfully", todo });
         }).catch((err) =>
-            res
-                .status(400)
-                .json({ error: "unable to update todo", message: err.message })
+            res.status(400).json({
+                message: "unable to update status",
+                error: err.message,
+            })
         );
 };
 

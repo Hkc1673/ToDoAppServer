@@ -8,9 +8,10 @@ const TodoSchema = new mongoose.Schema({
     description: {
         type: String,
     },
-    completed: {
-        type: Boolean,
-        default: false,
+    status: {
+        type: String,
+        enum: ["to do", "in progress", "done"],
+        default: "to do",
     },
 });
 
